@@ -30,8 +30,14 @@ function NewPage({ params }: { params: { id: string } }) {
   });
 
   return (
-    <section className="h-screen flex items-center justify-center">
+    <section
+      className="h-[calc(100vh-7rem)]
+    flex items-center justify-center"
+    >
       <form onSubmit={onSubmit}>
+        <h1 className="text-3xl font-bold">
+          {params.id ? "Update" : "Create"} Task
+        </h1>
         <label htmlFor="title" className="font-bold text-xs">
           Write a title
         </label>
