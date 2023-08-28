@@ -51,9 +51,27 @@ function NewPage({ params }: { params: { id: string } }) {
           className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-300 focus:border-sky-300 text-black block w-full"
           {...register("description")}
         ></textarea>
-        <button type="submit" className="bg-sky-500 px-3 py-2 rounded mt-2 ">
-          {params.id ? "Update" : "Create"}
-        </button>
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            className="bg-sky-500 px-3 py-2 rounded-md mt-2 "
+          >
+            {params.id ? "Update" : "Create"}
+          </button>
+          <button
+            type="button"
+            className="bg-red-500 px-3 py-2 rounded-md mt-2 ml-2"
+            onClick={async () => {
+              if (confirm("Are you sure you want to delete this task?")) {
+                await axios.delete(`/api/tasks/${params.id}`);
+                router.push("/");
+                router.refresh();
+              }
+            }}
+          >
+            Delete
+          </button>
+        </div>
       </form>
     </section>
   );
